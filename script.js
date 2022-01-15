@@ -1,24 +1,27 @@
-const imagem = document.querySelector('img');
-const botao = document.querySelector('button');
-const nomeDoPersonagem = document.querySelector('#nome');
-const especie = document.querySelector('#especie');
-const condicao = document.querySelector('#status');
+const  imagem  =  documento . querySelector ( 'img' ) ;
+const  botao  =  documento . querySelector ( 'button' ) ;
+const  nomeDoPersonagem  =  document . querySelector ( '#nome' ) ;
+const  espécie  =  documento . querySelector ( '#especie' ) ;
+const  condicao  =  documento . querySelector ( '#status' ) ;
 
-
-pegarPersonagem = () => {
-    return fetch(`https://rickandmortyapi.com/api/character/2`), {
-        method: 'GET'
-        Headers: {
-            Accept: 'application/json',
-            "Content-type": 'application/json'
+gerarValorAleatório  =  ( )  =>  {
+    retornar  Matemática . andar ( Math . random ( ) *  671 ) ;
+}
+pegarPersonagem  =  ( )  =>  {
+    let  numeroAleatorio  =  gerarValorAleatorio ( ) ;
+    return  buscar ( `https://rickandmortyapi.com/api/character/ ${ numeroAleatorio } ` , {
+        método : 'GET' ,
+        cabeçalhos : {
+            Aceite : 'application/json' ,
+            "Content-type" : 'application/json'
         }
-    }).then ((Response) => Response.json()).then((data) => {
-        imagem.src = data.image;
-        imagem.alt = data.name;
-        nomeDoPersonagem.innerHTML = data.name;
-        especie.innerHTML = data.especie;
-        status.innerHTML
-    }).
+    } ) . then ( ( resposta )  =  > resposta.json ( ) ) . _ então ( ( dados ) => {  
+        imagem . src  =  dados . imagem ;
+        imagem . alt  =  dados . nome ;
+        nomeDoPersonagem . innerHTML =  dados . nome ;
+        espécie . innerHTML  =  dados . espécies ;
+        condição . innerHTML  =  dados . estado ;
+        } ) ;
 }
 
-botao.onclick = pegarPersonagem;
+botao . onclick  =  pegarPersonagem ;
