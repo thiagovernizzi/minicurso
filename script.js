@@ -1,27 +1,27 @@
-const  imagem  =  documento . querySelector ( 'img' ) ;
-const  botao  =  documento . querySelector ( 'button' ) ;
-const  nomeDoPersonagem  =  document . querySelector ( '#nome' ) ;
-const  espécie  =  documento . querySelector ( '#especie' ) ;
-const  condicao  =  documento . querySelector ( '#status' ) ;
+const imagem = document.querySelector('img');
+const botao = document.querySelector('button');
+const nomeDoPersonagem = document.querySelector('#nome');
+const especie = document.querySelector('#especie');
+const condicao = document.querySelector('#status');
 
-gerarValorAleatório  =  ( )  =>  {
-    retornar  Matemática . andar ( Math . random ( ) *  671 ) ;
+gerarValorAleatorio = () => {
+    return Math.floor(Math.random()* 671);
 }
-pegarPersonagem  =  ( )  =>  {
-    let  numeroAleatorio  =  gerarValorAleatorio ( ) ;
-    return  buscar ( `https://rickandmortyapi.com/api/character/ ${ numeroAleatorio } ` , {
-        método : 'GET' ,
-        cabeçalhos : {
-            Aceite : 'application/json' ,
-            "Content-type" : 'application/json'
+pegarPersonagem = () => {
+    let numeroAleatorio = gerarValorAleatorio();
+    return fetch(`https://rickandmortyapi.com/api/character/${numeroAleatorio}`,{
+        method:'GET',
+        headers: {
+            Accept: 'application/json',
+            "Content-type":'application/json'
         }
-    } ) . then ( ( resposta )  =  > resposta.json ( ) ) . _ então ( ( dados ) => {  
-        imagem . src  =  dados . imagem ;
-        imagem . alt  =  dados . nome ;
-        nomeDoPersonagem . innerHTML =  dados . nome ;
-        espécie . innerHTML  =  dados . espécies ;
-        condição . innerHTML  =  dados . estado ;
-        } ) ;
+    }).then((response) => response.json()).then((data) => {
+        imagem.src = data.image;
+        imagem.alt = data.name;
+        nomeDoPersonagem.innerHTML= data.name;
+        especie.innerHTML = data.species;
+        condicao.innerHTML = data.status;
+        });
 }
 
-botao . onclick  =  pegarPersonagem ;
+botao.onclick = pegarPersonagem;
