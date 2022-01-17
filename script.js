@@ -1,27 +1,27 @@
-const imagem = document.querySelector ('img');
-const botao = document.querySelector ('button');
-const nomeDoPersonagem = document.querySelector ('#nome');
-const especie = document.querySelector ('#especie');
-const condicao = document.querySelector ('#status');
-
-gerarValorAleatorio = () => {
-    return Math.floor(Math.random()* 671);
+gerarValorAleatorio = (tamanho) => {
+    return Math.floor(Math.random()* tamanho);
 }
-pegarPersonagem = () => {
-    let numeroAleatorio = gerarValorAleatorio();
-    return fetch(`https://rickandmortyapi.com/api/character/${numeroAleatorio}`, {
+
+pegarPersonagens = () => {
+    let paginaAleatoria = gerarValorAleatorio(42);
+
+    return fetch(`https://rickandmortyapi.com/api/character?page=${paginaAleatoria}`, {
         method:'GET',
         headers: {
             Accept: 'application/json',
             "Content-type":'application/json'
         }
     }).then((response) => response.json()).then ((data) => {
-        imagem.src = data.image;
-        imagem.alt = data.name;
-        nomeDoPersonagem.innerHTML= data.name;
-        especie.innerHTML = data.species;
-        condicao.innerHTML = data.status;
-        });
+        for (let i = 1; i <= 3; i++) {
+            let personagem = data.results[gerarValorAleatorio(20)];
+            document.querySelector(`#img-${i}`).src = personagem.image;
+            document.querySelector(`#img-${i}`).alt = personagem.name;
+            document.querySelector(`#nome-${i}`).innerHTML= personagem.name;
+            document.querySelector(`#especie-${i}`).innerHTML = personagem.species;
+            document.querySelector(`#status-${i}`).innerHTML = personagem.status;
+        }
+    });
 }
 
-botao . onclick = pegarPersonagem;
+botao.onclick = pegarPersonagens;
+window.onload = pegarPersonagens;
